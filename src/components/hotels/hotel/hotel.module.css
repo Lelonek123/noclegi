@@ -1,0 +1,13 @@
+.hotelContainer {
+    border: 1px solid hsl(0, 0%, 70%);
+    width: 70%;
+    background-color: hsl(200, 10%, 85%);
+}
+
+.hotelContainer:not(:first-of-type) {
+    margin-top: 20px;
+}
+
+.hotelContainer:last-child {
+    margin-bottom: 20px;
+}

@@ -1,11 +1,12 @@
 import React from 'react';
 import Hotel from './hotel/hotel.js'
+import style from './hotels.module.css'
 
 function Hotels() {
     return (
-        <div>
-            <h2>Hotels</h2>
-            <Hotel />
+        <div className={`container ${style.hotelsContainer}`}>
+            <h2>Oferta:</h2>
+            <Hotel style={{color: 'red'}}/>
             <Hotel />
         </div>
     )

@@ -1,7 +1,13 @@
 import React from 'react';
+import style from "./header.module.css"
+import SearchBar from "./searchBar/searchBar.js";
 
 function Header() {
-    return <h1>Header</h1>
+    return (
+        <div className={`${style.header}`}>
+            <SearchBar />
+        </div>
+    )
 }
 
 export default Header;

@@ -1,0 +1,11 @@
+* {
+    box-sizing: border-box;
+}
+
+.header {
+    background-color: hsl(0, 0%, 75%);
+    display: flex;
+    padding: 20px 0 20px 0;
+    justify-content: center;
+}
+
