@@ -5,6 +5,7 @@ import SearchBar from "./searchBar/searchBar.js";
 function Header() {
     return (
         <div className={`${style.header}`}>
+            <div className={style.bgImage}></div>
             <SearchBar />
         </div>
     )
