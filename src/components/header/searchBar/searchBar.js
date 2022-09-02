@@ -14,7 +14,14 @@ function SearchBar() {
             className="form-control"
             type="text" placeholder="Search..."
             style={{marginLeft: '10px', border: '1px solid black'}}
-            value={term} onChange={e => setTerm(e.target.value)}
+            value={term} 
+            onChange={e => setTerm(e.target.value)}
+            onKeyDown={e => {
+                if (e.key == 'Enter') {
+                    search();
+                    setTerm('');
+                }
+            }}
         />
         <button 
             className="btn btn-primary" 
