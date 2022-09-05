@@ -1,5 +1,5 @@
 # Usage
-`git clone` the repository and run `npm install` to install dependencies
+`git clone` the repository and run `npm install` to install dependencies, then use scripts listed below to run the project.
 
 ## Available Scripts
 
