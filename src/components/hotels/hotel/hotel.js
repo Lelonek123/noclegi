@@ -1,6 +1,20 @@
+import PropTypes from "prop-types";
 import React from "react";
 import style from "./hotel.module.css";
 import hotelImg from "../../../assets/images/hotel.jpg";
+
+const propTypes = {
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    reviews: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+};
+
+const defaultProps = {
+    description: "Not specified...",
+};
 
 function Hotel(props) {
     return (
@@ -23,7 +37,7 @@ function Hotel(props) {
             <div className="col-12 mt-2">
                 <p>{props.description}</p>
                 <button
-                    className="btn btn-primary"
+                    className={`btn btn-${props.theme}`}
                     style={{ width: "100%", marginBottom: "10px" }}
                 >
                     Show
@@ -32,5 +46,8 @@ function Hotel(props) {
         </div>
     );
 }
+
+Hotel.propTypes = propTypes;
+Hotel.defaultProps = defaultProps;
 
 export default Hotel;

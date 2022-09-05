@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+.loadingSpinnerContainer {
+    margin: auto;
+    position: relative;
+    height: 300px;
+    width: 300px;
+    transform: scale(0.5);
+}
+.spinnerText {
+    position: absolute;
+    font-size: 3rem;
+    color: hsl(0, 0%, 10%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: spinner-text 6s infinite;
+    animation-timing-function: linear;
+}
+.loadingSpinner {
+    position: absolute;
+    height: 300px;
+    width: 300px;
+    border-radius: 150px;
+    animation: loading-spinner 2500ms infinite;
+    animation-timing-function: linear;
+    border: 5px solid transparent;
+}
+.loadingSpinnerRed {
+    --start-angle: 0deg;
+    --end-angle: 360deg;
+    border-top: 5px solid darkred;
+    animation: loading-spinner 2000ms infinite;
+    animation-timing-function: linear;
+}
+.loadingSpinnerBlue {
+    --start-angle: 90deg;
+    --end-angle: 450deg;
+    border-top: 5px solid hsl(210, 100%, 50%);
+    animation: loading-spinner 2250ms infinite;
+    animation-timing-function: linear;
+}
+.loadingSpinnerGreen {
+    --start-angle: 180deg;
+    --end-angle: 540deg;
+    border-top: 5px solid green;
+}
+@keyframes loading-spinner {
+    0% {
+        transform: rotate(var(--start-angle, 0deg));
+    }
+    100% {
+        transform: rotate(var(--end-angle, 360deg));
+    }
+}
+@keyframes spinner-text {
+    0% {
+        opacity: 1;
+    }
+    30% {
+        opacity: 0.4;
+    }
+    70% {
+        opacity: 0.4;
+    }
+    100% {
+        opacity: 1;
+    }
+}

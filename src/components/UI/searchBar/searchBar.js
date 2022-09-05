@@ -1,5 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import style from "./searchBar.module.css";
+
+const propTypes = {
+    onSearch: PropTypes.func.isRequired,
+};
 
 function SearchBar(props) {
     const [term, setTerm] = React.useState("");
@@ -25,7 +30,7 @@ function SearchBar(props) {
                 }}
             />
             <button
-                className="btn btn-primary"
+                className={`btn btn-${props.theme}`}
                 style={{ margin: "0 10px", border: "1px solid white" }}
                 onClick={search}
             >
@@ -34,5 +39,7 @@ function SearchBar(props) {
         </div>
     );
 }
+
+SearchBar.propTypes = propTypes;
 
 export default SearchBar;
