@@ -1,6 +1,4 @@
 import React from 'react';
-import Fragment from '../hoc/fragment.js';
-import withClass from '../hoc/withClass.js';
 
 function Layout(props) {
     return (
@@ -13,4 +11,4 @@ function Layout(props) {
     )
 }
 
-export default withClass(Layout, "layout");
+export default Layout;
