@@ -8,14 +8,20 @@ const propTypes = {
 
 function SearchBar(props) {
     const [term, setTerm] = React.useState("");
+    const inputRef = React.useRef()
 
     const search = () => {
         props.onSearch(term);
     };
 
+    React.useEffect(() => {
+        inputRef.current.focus();
+    }, [])
+
     return (
         <div className={style.searchBarContainer}>
             <input
+                ref={inputRef}
                 className="form-control"
                 type="text"
                 placeholder="Search..."

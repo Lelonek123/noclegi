@@ -1,14 +1,16 @@
 import React from 'react';
+import Fragment from '../hoc/fragment.js';
+import withClass from '../hoc/withClass.js';
 
 function Layout(props) {
     return (
-        <div>
-            <div>{props.header}</div>
+        <>
+            <div className="header">{props.header}</div>
             <div>{props.menu}</div>
             <div>{props.content}</div>
             <div>{props.footer}</div>
-        </div>
+        </>
     )
 }
 
-export default Layout;
+export default withClass(Layout, "layout");

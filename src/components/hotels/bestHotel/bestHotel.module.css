@@ -1,0 +1,18 @@
+.container {
+    width: fit-content;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: hsl(120, 70%, 40%);
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: 2px solid hsl(120, 90%, 30%);
+}
+
+.container > p {
+    margin: 0;
+}
+
+.container > a {
+    margin-left: 10px;
+}

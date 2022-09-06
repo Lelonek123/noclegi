@@ -31,54 +31,92 @@ const hotelList = [
     },
 ];
 
+const reducer = (state, action) => {
+    const newState = {...state}
+    
+    switch (action.type) {
+        case 'change-theme' : 
+            newState.theme = state.theme === 'primary' ? 'danger' : 'primary';
+            break;
+        case 'change-theme-to-warning' :
+            newState.theme = 'warning';
+            break;
+        case 'set-loading' :
+            newState.loading = action.loading;
+            break;
+        case 'set-hotels' :
+            newState.hotels = action.hotels;
+            break;
+        default :
+            throw new Error(`Action is not defined: "${action.type}"`);
+    }
+
+    return newState
+}
+
+const initialState = {
+    theme: '',
+    hotels: [],
+    loading: true
+}
+
+const init = (initState) => {
+    initState.theme = 'danger'
+    return initState
+}
+
 function App() {
-    const [hotels, setHotels] = React.useState([]);
-    const [loading, setLoading] = React.useState(true);
-    const [theme, setTheme] = React.useState("primary");
+    // const [hotels, setHotels] = React.useState([]);
+    // const [loading, setLoading] = React.useState(true); 
+    // const [theme, setTheme] = React.useState("primary");
+    
+    const [state, dispatch] = React.useReducer(reducer, initialState, init);
 
     const searchHandler = (term) => {
         if (term === "") {
-            setHotels(hotelList);
-            return;
+            dispatch({type: 'set-hotels', hotels: hotelList});
+            return
         }
 
-        setHotels(
-            hotelList.filter((hotel) =>
-                hotel.name.toLowerCase().includes(term.toLowerCase())
-            )
-        );
+        const newHotels = hotelList.filter((hotel) => {
+            return hotel.name.toLowerCase().includes(term.toLowerCase())            
+        });
+
+        dispatch({type: 'set-hotels', hotels: newHotels});
     };
 
-    const changeTheme = () => {
-        const newTheme = theme === 'primary' ? 'danger' : 'primary';
-        setTheme(newTheme);
-    };
+
+    // const changeTheme = () => {
+    //     // const newTheme = theme === 'primary' ? 'danger' : 'primary';
+    //     // setTheme(newTheme);
+
+    //     dispatch({ type: "change-theme" });
+    //     // dispatch({type: "change-theme-to-warning"})
+    // };
 
     React.useEffect(() => {
-        if (loading === true) {
             setTimeout(() => {
-                setHotels(hotelList);
-                setLoading(false);
+                dispatch({type: 'set-hotels', hotels: hotelList})
+                dispatch({type: 'set-loading', loading: false})
             }, 1000);
-        }
-    });
+    }, []);
 
     return (
         <Layout
             header={
                 <Header>
-                    <SearchBar onSearch={searchHandler} theme={theme} />
+                    <SearchBar onSearch={searchHandler} theme={state.theme} />
                 </Header>
             }
             footer={<Footer />}
             content={
-                loading ? (
+                state.loading ? (
                     <LoadingIcon />
                 ) : (
-                    <Hotels hotels={hotels} theme={theme} />
+                    <Hotels hotels={state.hotels} theme={state.theme} />
                 )
             }
-            menu={<Menu theme={theme} changeTheme={changeTheme} />}
+            menu={<Menu theme={state.theme} changeTheme={() => dispatch({ type: "change-theme" })} />}
         />
     );
 }
