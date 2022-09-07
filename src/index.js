@@ -5,51 +5,51 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-const state = [];
-let index = 0;
+// const state = [];
+// let index = 0;
 
-function useState(defaultValue) {
-    const id = index++;
+// function useState(defaultValue) {
+//     const id = index++;
 
-    if (state[id]) {
-        return state[id];
-    }
+//     if (state[id]) {
+//         return state[id];
+//     }
 
-    const setValue = (newValue) => {
-        state[id][0] = newValue;
-        render();
-    }
+//     const setValue = (newValue) => {
+//         state[id][0] = newValue;
+//         render();
+//     }
 
-    const currentState = [defaultValue, setValue];
-    state[id] = currentState;
+//     const currentState = [defaultValue, setValue];
+//     state[id] = currentState;
     
-    return currentState;
-}
+//     return currentState;
+// }
 
-function TestHook() {
-    const [value, setValue] = useState('start');
-    const [text, setText] = useState('drugistan')
+// function TestHook() {
+//     const [value, setValue] = useState('start');
+//     const [text, setText] = useState('drugistan')
 
 
-    return (
-        <>
-            <h1>TestHook!</h1>
-            <p>{text}</p>
-            <input 
-                type="text"
-                value={value}
-                onChange={e => setValue(e.target.value)}
-            />
-        </>
-    )
-}
+//     return (
+//         <>
+//             <h1>TestHook!</h1>
+//             <p>{text}</p>
+//             <input 
+//                 type="text"
+//                 value={value}
+//                 onChange={e => setValue(e.target.value)}
+//             />
+//         </>
+//     )
+// }
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 
 function render() {
-    index = 0;
+    // index = 0;
     root.render(
     <React.StrictMode>
         {/*<TestHook />*/}

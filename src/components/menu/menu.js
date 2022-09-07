@@ -1,17 +1,14 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import style from "./menu.module.css";
 import ThemeButton from '../UI/themeButton/themeButton.js';
 
 function Menu(props) {
-    const changeTheme = () => {
-        props.changeTheme();
-    };
-
     return (
         <div className={`${style.containerMenu} container`}>
             <ul>
                 <li>
-                    <a href="#">Home</a>
+                    <Link to="/">Home</Link>
                 </li>
                 <li>
                     <a href="#">Hotels</a>

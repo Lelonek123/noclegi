@@ -1,4 +1,5 @@
 import React from "react";
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Header from "./components/header/header.js";
 import Menu from "./components/menu/menu.js";
 import Hotels from "./components/hotels/hotels.js";
@@ -115,26 +116,36 @@ function App() {
             }, 1000);
     }, []);
 
-    return (
-        <Layout
-            header={
-                <Header>
-                    <SearchBar onSearch={searchHandler} theme={state.theme} />
-                </Header>
-            }
-            footer={<Footer />}
-            content={
-                state.loading ? (
-                    <LoadingIcon />
-                ) : (
-                    <>
+    const content = (
+        <Routes>
+            <Route path="/" element={
+                <>
                     {lastHotel ? <LastHotel onRemove={removeLastHotel} {...lastHotel}/> : null}
                     <Hotels onOpen={openHotel} hotels={state.hotels} theme={state.theme} />
-                    </>
-                )
-            }
-            menu={<Menu theme={state.theme} changeTheme={() => dispatch({ type: "change-theme" })} />}
-        />
+                </>
+            } />
+            <Route path="/hotel/:id" element={
+                <h1>This is hotel...</h1>            
+            } />
+        </Routes>
+    )
+
+    return (
+        <Router>
+            <Layout
+                header={
+                    <Header>
+                        <SearchBar onSearch={searchHandler} theme={state.theme} />
+                    </Header>
+                }
+                footer={<Footer />}
+                content={
+                    state.loading ? (
+                        <LoadingIcon />
+                    ) : content }
+                menu={<Menu theme={state.theme} changeTheme={() => dispatch({ type: "change-theme" })} />}
+            />
+        </Router>
     );
 }
 

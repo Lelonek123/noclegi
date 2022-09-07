@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import React from "react";
 import style from "./hotel.module.css";
 import hotelImg from "../../../assets/images/hotel.jpg";
+import { Link } from 'react-router-dom';
+
 
 const propTypes = {
     id: PropTypes.number.isRequired,
@@ -18,7 +20,6 @@ const defaultProps = {
 
 function Hotel(props) {
     const clickHandler = (e) => {
-        e.preventDefault();
         props.onOpen(props)
     }
 
@@ -41,13 +42,21 @@ function Hotel(props) {
             </div>
             <div className="col-12 mt-2">
                 <p>{props.description}</p>
-                <button
+                <Link 
+                    to={`/hotel/${props.id}`} 
+                    className={`btn btn-${props.theme}`} 
+                    style={{ width: "100%", marginBottom: "10px" }}
+                    onClick={clickHandler}
+                >
+                    Show
+                </Link>
+                {/*<button
                     className={`btn btn-${props.theme}`}
                     style={{ width: "100%", marginBottom: "10px" }}
                     onClick={clickHandler}
                 >
                     Show
-                </button>
+                </button>*/}
             </div>
         </div>
     );
