@@ -10,14 +10,19 @@ const propTypes = {
 }
 
 function Hotels(props) {
+    const [bestHotel, setBestHotel] = React.useState();
 
-    const getBestHotel = () => {
-        if (props.hotels.length < 2) {
+    const getBestHotel = React.useCallback((options) => {
+        if (props.hotels.length < options.minHotels) {
             return null
         } else {
             return props.hotels.sort((a, b) => b-a)[0]
         }
-    }
+    }, [props.hotels]);
+
+    React.useLayoutEffect(() => {
+        setBestHotel(getBestHotel({minHotels: 2}));
+    }, [props.hotels])
 
     if (props.hotels.length === 0) {
         return (
@@ -28,9 +33,9 @@ function Hotels(props) {
     }
     return (
         <div className={`container ${style.hotelsContainer}`}>
-            <BestHotel bestHotel={getBestHotel()}/>
+            {bestHotel ? <BestHotel bestHotel={bestHotel}/> : null}
             <h2>Hotels ({props.hotels.length}):</h2>
-            {props.hotels.map(hotel => <Hotel key={hotel.id} {...hotel} theme={props.theme}/>)}
+            {props.hotels.map(hotel => <Hotel onOpen={props.onOpen} key={hotel.id} {...hotel} theme={props.theme}/>)}
         </div>
     )
 }

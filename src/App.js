@@ -6,6 +6,9 @@ import LoadingIcon from "./components/UI/loadingIcon/loadingIcon.js";
 import SearchBar from "./components/UI/searchBar/searchBar.js";
 import Layout from "./components/layout/layout.js";
 import Footer from "./components/footer/footer.js";
+import LastHotel from "./components/hotels/lastHotel/lastHotel.js";
+import useStateStorage from './hooks/useStateStorage.js';
+import useWebsiteTitle from './hooks/useWebsiteTitle.js';
 import "./App.css";
 
 const hotelList = [
@@ -71,6 +74,9 @@ function App() {
     // const [theme, setTheme] = React.useState("primary");
     
     const [state, dispatch] = React.useReducer(reducer, initialState, init);
+    const [lastHotel, setLastHotel] = useStateStorage('last-hotel', null);
+    useWebsiteTitle('Home');
+
 
     const searchHandler = (term) => {
         if (term === "") {
@@ -84,6 +90,14 @@ function App() {
 
         dispatch({type: 'set-hotels', hotels: newHotels});
     };
+
+    const openHotel = (hotel) => {
+        setLastHotel(hotel)
+    }
+
+    const removeLastHotel = () => {
+        setLastHotel(null);
+    }
 
 
     // const changeTheme = () => {
@@ -113,7 +127,10 @@ function App() {
                 state.loading ? (
                     <LoadingIcon />
                 ) : (
-                    <Hotels hotels={state.hotels} theme={state.theme} />
+                    <>
+                    {lastHotel ? <LastHotel onRemove={removeLastHotel} {...lastHotel}/> : null}
+                    <Hotels onOpen={openHotel} hotels={state.hotels} theme={state.theme} />
+                    </>
                 )
             }
             menu={<Menu theme={state.theme} changeTheme={() => dispatch({ type: "change-theme" })} />}

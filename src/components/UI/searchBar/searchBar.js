@@ -8,7 +8,7 @@ const propTypes = {
 
 function SearchBar(props) {
     const [term, setTerm] = React.useState("");
-    const inputRef = React.useRef()
+    const inputRef = React.useRef();
 
     const search = () => {
         props.onSearch(term);
@@ -16,7 +16,7 @@ function SearchBar(props) {
 
     React.useEffect(() => {
         inputRef.current.focus();
-    }, [])
+    }, []);
 
     return (
         <div className={style.searchBarContainer}>

@@ -17,6 +17,11 @@ const defaultProps = {
 };
 
 function Hotel(props) {
+    const clickHandler = (e) => {
+        e.preventDefault();
+        props.onOpen(props)
+    }
+
     return (
         <div className={`${style.hotelContainer} row`}>
             <div className="col-4 mt-2">
@@ -39,6 +44,7 @@ function Hotel(props) {
                 <button
                     className={`btn btn-${props.theme}`}
                     style={{ width: "100%", marginBottom: "10px" }}
+                    onClick={clickHandler}
                 >
                     Show
                 </button>
