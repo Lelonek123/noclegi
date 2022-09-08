@@ -10,6 +10,10 @@ import Footer from "./components/footer/footer.js";
 import LastHotel from "./components/hotels/lastHotel/lastHotel.js";
 import useStateStorage from './hooks/useStateStorage.js';
 import useWebsiteTitle from './hooks/useWebsiteTitle.js';
+import Hotel from './pages/hotel/hotel.js';
+import Search from "./components/search/search.js";
+import PageNotFound from "./pages/404/404.js"
+
 import "./App.css";
 
 const hotelList = [
@@ -78,20 +82,6 @@ function App() {
     const [lastHotel, setLastHotel] = useStateStorage('last-hotel', null);
     useWebsiteTitle('Home');
 
-
-    const searchHandler = (term) => {
-        if (term === "") {
-            dispatch({type: 'set-hotels', hotels: hotelList});
-            return
-        }
-
-        const newHotels = hotelList.filter((hotel) => {
-            return hotel.name.toLowerCase().includes(term.toLowerCase())            
-        });
-
-        dispatch({type: 'set-hotels', hotels: newHotels});
-    };
-
     const openHotel = (hotel) => {
         setLastHotel(hotel)
     }
@@ -124,8 +114,20 @@ function App() {
                     <Hotels onOpen={openHotel} hotels={state.hotels} theme={state.theme} />
                 </>
             } />
+            <Route path="/search" element={
+                <>
+                    {lastHotel ? <LastHotel onRemove={removeLastHotel} {...lastHotel}/> : null}
+                    <Hotels onOpen={openHotel} hotels={state.hotels} theme={state.theme} />
+                </>
+            } />
             <Route path="/hotel/:id" element={
-                <h1>This is hotel...</h1>            
+                <Hotel />            
+            } />
+            <Route path="/search/:term" element={
+                <Search openHotel={openHotel} theme={state.theme}/>
+            } />
+            <Route path="*" element={
+                <PageNotFound />
             } />
         </Routes>
     )
@@ -135,7 +137,7 @@ function App() {
             <Layout
                 header={
                     <Header>
-                        <SearchBar onSearch={searchHandler} theme={state.theme} />
+                        <SearchBar theme={state.theme} />
                     </Header>
                 }
                 footer={<Footer />}

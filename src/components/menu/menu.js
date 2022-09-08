@@ -8,10 +8,7 @@ function Menu(props) {
         <div className={`${style.containerMenu} container`}>
             <ul>
                 <li>
-                    <Link to="/">Home</Link>
-                </li>
-                <li>
-                    <a href="#">Hotels</a>
+                    <Link to="/" className={`btn btn-${props.theme}`}>Home</Link>
                 </li>
                 <li>
                     <ThemeButton changeTheme={props.changeTheme} theme={props.theme}/>

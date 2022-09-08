@@ -1,6 +1,6 @@
 import React from 'react';
-import {useParams} from 'react-router-dom';
-import LoadingIcon from '../../components/UI/loadingIcon/loadingIcon.js';
+import { useParams } from 'react-router-dom';
+import Hotels from '../hotels/hotels.js'
 
 const hotelList = [
     {
@@ -25,30 +25,28 @@ const hotelList = [
     },
 ];
 
-export default function Hotel() {
-    const { id } = useParams();
-    const [hotel, setHotel] = React.useState({})
-    const [loading, setLoading] = React.useState(true)
-
-    const fetchHotel = () => {
-        setHotel(hotelList[id - 1])
-    }
+export default function Search(props) {
+    const { term } = useParams();
+    const [hotels, setHotels] = React.useState([])
 
     React.useEffect(() => {
-        setTimeout(() => {
-            fetchHotel();
-            setLoading(false)
-        }, 1000)
+        search(term)
     })
 
-    return (
-        <>
-        { loading ? (
-                <LoadingIcon />
-            ) : (
-                <h1>Hotel: {hotel.name}</h1>
-            )
+    const search = (term) => {
+        if (term === "") {
+            setHotels(hotelList);
+            return
         }
-        </>
+
+        const newHotels = hotelList.filter((hotel) => {
+            return hotel.name.toLowerCase().includes(term.toLowerCase())            
+        });
+
+        setHotels(newHotels);
+    };
+
+    return (
+        <Hotels onOpen={props.openHotel} hotels={hotels} theme={props.theme} />
     )
 }

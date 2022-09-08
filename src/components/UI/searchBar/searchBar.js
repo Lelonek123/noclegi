@@ -1,17 +1,21 @@
 import React from "react";
-import PropTypes from "prop-types";
 import style from "./searchBar.module.css";
-
-const propTypes = {
-    onSearch: PropTypes.func.isRequired,
-};
+import {
+  useLocation,
+  useNavigate,
+  useParams
+} from "react-router-dom";
 
 function SearchBar(props) {
     const [term, setTerm] = React.useState("");
     const inputRef = React.useRef();
+    let location = useLocation();
+    let navigate = useNavigate();
+    let params = useParams();
+
 
     const search = () => {
-        props.onSearch(term);
+        navigate(`/search/${term}`)
     };
 
     React.useEffect(() => {
@@ -45,7 +49,5 @@ function SearchBar(props) {
         </div>
     );
 }
-
-SearchBar.propTypes = propTypes;
 
 export default SearchBar;
